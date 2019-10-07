@@ -64,6 +64,24 @@ class TestPassword(unittest.TestCase):
         found_credentials = Password.find_by_account_name("Instagram")
         self.assertEqual(found_credentials.account_name, test_credentials.account_name)
 
+    def test_credentials_exist(self):
+        '''
+        Test whether the credentials object actually exists
+        '''
+        self.new_credentials.save_credential()
+        test_credentials = Password("Instagram", "Jmos", "Mbugua", "johnmbugua")
+        test_credentials.save_credential()
+
+        credentials_exists = Password.credential_exist("Instagram")
+        self.assertTrue(credentials_exists)
+
+    def test_display_credentials(self):
+        '''
+        Test method that returns a list of all credentials
+        '''
+        self.assertEqual(Password.display_credentials(), Password.credentials_list)
+
+
 
 if __name__ == '__main__':
     unittest.main()
