@@ -47,7 +47,7 @@ def main():
     print('\n')
 
     while True:
-        print("Use these short codes: cc - Create new credentials, dc - display credentials, fc - Find a credential, ex-exit the account")
+        print("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, ex-exit the account")
 
         short_code = input().lower()
 
@@ -72,6 +72,28 @@ def main():
             print(f"New Credential {fname} {lname} created")
             print('\n')
 
+        elif short_code == 'sc':
+            print("Save Existing credentials")
+            print("-"*10)
+
+            print("Site Name...")
+            sname = input()
+
+            print("First Name")
+            fname = input()
+
+            print("Last Name")
+            lname = input()
+
+            print("Password")
+            password = input()
+
+            save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
+            print('\n')
+            print(f"{sname} credentials saved")
+            print('\n')
+
+
         elif short_code == 'dc':
             if display_credentials():
                 print("Here is a list of all you credentials")
@@ -95,7 +117,16 @@ def main():
                 print(f"{search_site.first_name} {search_site.last_name}")
                 print("-"*20)
 
-                print()
+                print(f"Password.....{search_site.user_password}")
+
+            else:
+                print("These credentials do not exist")
+
+        elif short_code == "ex":
+            print("Bye.....")
+            break
+        else:
+            print("I really didn't get that")
 
 
 
