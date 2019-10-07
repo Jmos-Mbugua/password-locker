@@ -1,5 +1,6 @@
 import unittest
-from passwords import Password
+from credentials import Password
+import pyperclip
 
 class TestPassword(unittest.TestCase):
     '''
@@ -80,6 +81,8 @@ class TestPassword(unittest.TestCase):
         Test method that returns a list of all credentials
         '''
         self.assertEqual(Password.display_credentials(), Password.credentials_list)
+
+
 
 
 

@@ -52,6 +52,26 @@ class Password :
         self.last_name = last_name
         self.user_password = user_password
 
+
+        
+
+
+
+class User:
+    '''
+    class that creates instances of users
+    '''
+
+    users_list = [] #creates an empty list for user credentials
+
+
+    def __init__(self, user_first_name, user_last_name, user_passwrd):
+        self.user_first_name = user_first_name
+        self.user_last_name = user_last_name
+        self.user_passwrd = user_passwrd
+
+
+
     
 
 
