@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.6
 from credentials import Password
 import sys
+import random
+import string
 from credentials import User
 # from termcolor import colored, cprint
 
@@ -94,7 +96,7 @@ def main():
                 print("lOGIN SUCCESSFUL")
                 pass
                 while True:
-                    print("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, ex-exit the account")
+                    print("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, delete - delete credentials, ex-exit the account")
 
                     short_code = input().lower()
 
@@ -132,8 +134,17 @@ def main():
                         print("Last Name")
                         lname = input()
 
-                        print("Password")
-                        password = input()
+                        
+                        print("Would you like a generated password, type yes/no")
+                        password = input().upper()
+                        if password == 'YES':
+                            print("How long would you like your password to be?")
+                            password_length = int(input())
+
+
+
+
+
 
                         save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
                         print('\n')
@@ -168,6 +179,19 @@ def main():
 
                         else:
                             print("These credentials do not exist")
+
+                    elif short_code == 'delete':
+                        print("Please enter the name name of the site you want to delete")
+                        site_delete = input()
+                        if check_existing_credentials(site_delete):
+                            site_delete = find_credential(site_delete)
+                            delete_credential(site_delete)
+
+                            print("Credentials deleted successfully")
+
+                        else:
+                            print("Credentials do not exist")
+
 
                     elif short_code == "ex":
                         print("Bye.....")
