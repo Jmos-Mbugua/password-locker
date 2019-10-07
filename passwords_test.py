@@ -12,6 +12,7 @@ class TestPassword(unittest.TestCase):
         
         
         self.new_credentials = Password("Facebook","John","Mbugua","jmos849")
+        
 
 
     def tearDown(self):
@@ -19,6 +20,7 @@ class TestPassword(unittest.TestCase):
         Tear down method that does clean up after each test case has run
         '''
         Password.credentials_list = []
+        
 
     def test__init(self):
         '''
@@ -45,7 +47,7 @@ class TestPassword(unittest.TestCase):
 
     def test_delete_credential(self):
         '''
-        Test Case to check whether we can delete crredentials from our credentials list
+        Test Case to check whether we can delete credentials from our credentials list
         '''
         self.new_credentials.save_credential()
         test_credentials = Password("Instagram", "Jmos", "Mbugua", "johnmbugua")
