@@ -12,6 +12,13 @@ class TestPassword(unittest.TestCase):
         
         self.new_credentials = Password("Facebook","John","Mbugua","jmos849")
 
+
+    def tearDown(self):
+        '''
+        Tear down method that does clean up after each test case has run
+        '''
+        Password.credentials_list = []
+
     def test__init(self):
         '''
         Test to check whether the credentials objects are instantiated correctly
@@ -29,7 +36,33 @@ class TestPassword(unittest.TestCase):
         self.assertEqual(len(Password.credentials_list),1)
 
     def test_save_multiple_credentials(self):
-        
+        self.new_credentials.save_credential()
+        test_credentials = Password("Instagram", "Jmos", "Mbugua", "johnmbugua")
+        test_credentials.save_credential()
+        self.assertEqual(len(Password.credentials_list),2)
+
+
+    def test_delete_credential(self):
+        '''
+        Test Case to check whether we can delete crredentials from our credentials list
+        '''
+        self.new_credentials.save_credential()
+        test_credentials = Password("Instagram", "Jmos", "Mbugua", "johnmbugua")
+        test_credentials.save_credential()
+
+        self.new_credentials.delete_credential() #deleting an object
+        self.assertEqual(len(Password.credentials_list),1)
+
+    def test_find_credentials(self):
+        '''
+        Test case to check whether we can find credentials using site name
+        '''
+        self.new_credentials.save_credential()
+        test_credentials = Password("Instagram", "Jmos", "Mbugua", "johnmbugua")
+        test_credentials.save_credential()
+
+        found_credentials = Password.find_by_account_name("Instagram")
+        self.assertEqual(found_credentials.account_name, test_credentials.account_name)
 
 
 if __name__ == '__main__':
