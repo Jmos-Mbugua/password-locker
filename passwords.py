@@ -26,6 +26,24 @@ class Password :
             if credential.account_name == account_name:
                 return credential
 
+    @classmethod
+    def credential_exist(cls, account_name):
+        '''
+        Method that checks if a credential actually exists
+        '''
+        for credential in cls.credentials_list:
+            if credential.account_name == account_name:
+                return True
+
+        return False
+
+
+    @classmethod
+    def display_credentials(cls):
+        '''
+        Method that displays the credentials list
+        '''
+        return cls.credentials_list
 
 
     def __init__(self, account_name, first_name, last_name, user_password):
