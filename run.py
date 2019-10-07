@@ -1,5 +1,8 @@
 #!/usr/bin/env python3.6
 from credentials import Password
+import sys
+from credentials import User
+# from termcolor import colored, cprint
 
 def create_credential(sname, fname, lname, password):
     '''
@@ -7,6 +10,8 @@ def create_credential(sname, fname, lname, password):
     '''
     new_credential = Password(sname, fname, lname,password)
     return new_credential
+
+
 
 def save_credential(credential):
     '''
@@ -39,94 +44,152 @@ def display_credentials():
     return Password.display_credentials()
 
 
+
+#Users funtions
+def create_user(username, psswrd):
+    '''
+    Function to create a new user credentials
+    '''
+    new_user = User(username, psswrd)
+    return new_user
+
+def save_users(user):
+    '''
+    Funtion to save the credential
+    '''
+    user.save_users()
+
+
+
 def main():
     print("Hello, Welcome to Password Locker. What is your name?")
     user_name = input()
 
-    print(f"Hello {user_name}, What would you like to do?")
-    print('\n')
-
     while True:
-        print("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, ex-exit the account")
+        print(f"Hello {user_name}, Please use these short codes to either login to your account or sign in. lg - log into your account, ca - create an account")
+        s_code = input().lower()
 
-        short_code = input().lower()
+        if s_code == 'ca':
+            print("Enter username")
+            fusername = input()
 
-        if short_code == 'cc':
-            print("New Credentials")
-            print("-"*10)
+            print("Enter password")
+            fpin = input()
 
-            print("Site Name...")
-            sname = input()
+            save_users(create_user(fusername, fpin))
 
-            print("First Name")
-            fname = input()
+            print("You have successfully created an account")
+            print("Please proceed to log in")
 
-            print("Last Name....")
-            lname = input()
+        
+        
+            print("Enter your username")
+            username = input()
+            
 
-            print("Password")
-            password = input()
+            print("Enter your password")
+            pin = input()
 
-            save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
-            print('\n')
-            print(f"New Credential {fname} {lname} created")
-            print('\n')
+            if username == fusername and pin == fpin:
+                print("lOGIN SUCCESSFUL")
+                pass
+                while True:
+                    print("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, ex-exit the account")
 
-        elif short_code == 'sc':
-            print("Save Existing credentials")
-            print("-"*10)
+                    short_code = input().lower()
 
-            print("Site Name...")
-            sname = input()
+                    if short_code == 'cc':
+                        print("New Credentials")
+                        print("-"*10)
 
-            print("First Name")
-            fname = input()
+                        print("Site Name...")
+                        sname = input()
 
-            print("Last Name")
-            lname = input()
+                        print("First Name")
+                        fname = input()
 
-            print("Password")
-            password = input()
+                        print("Last Name....")
+                        lname = input()
 
-            save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
-            print('\n')
-            print(f"{sname} credentials saved")
-            print('\n')
+                        print("Password")
+                        password = input()
+
+                        save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
+                        print('\n')
+                        print(f"New Credential {fname} {lname} created")
+                        print('\n')
+
+                    elif short_code == 'sc':
+                        print("Save Existing credentials")
+                        print("-"*10)
+
+                        print("Site Name...")
+                        sname = input()
+
+                        print("First Name")
+                        fname = input()
+
+                        print("Last Name")
+                        lname = input()
+
+                        print("Password")
+                        password = input()
+
+                        save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
+                        print('\n')
+                        print(f"{sname} credentials saved")
+                        print('\n')
 
 
-        elif short_code == 'dc':
-            if display_credentials():
-                print("Here is a list of all you credentials")
-                print('\n')
+                    elif short_code == 'dc':
+                        if display_credentials():
+                            print("Here is a list of all you credentials")
+                            print('\n')
 
-                for credential in display_credentials():
-                    print(f"{credential.account_name} .... {credential.first_name} {credential.last_name} .... {credential.user_password}")
-                    print('\n')
+                            for credential in display_credentials():
+                                print(f"{credential.account_name} .... {credential.first_name} {credential.last_name} .... {credential.user_password}")
+                                print('\n')
 
+                        else:
+                            print('\n')
+                            print("You don't seem to have any credentials saved yet")
+                            print('\n')
+
+                    elif short_code == 'fc':
+                        print("Please enter the site name you want to search for")
+
+                        search_site = input()
+                        if check_existing_credentials(search_site):
+                            search_site = find_credential(search_site)
+                            print(f"{search_site.first_name} {search_site.last_name}")
+                            print("-"*20)
+
+                            print(f"Password.....{search_site.user_password}")
+
+                        else:
+                            print("These credentials do not exist")
+
+                    elif short_code == "ex":
+                        print("Bye.....")
+                        break
+                    else:
+                        print("I really didn't get that")
             else:
-                print('\n')
-                print("You don't seem to have any credentials saved yet")
-                print('\n')
+                print("Invalid login details")
 
-        elif short_code == 'fc':
-            print("Please enter the site name you want to search for")
+        elif s_code == 'lg':
+            print("Please Enter your name")
+            inputname = input()
 
-            search_site = input()
-            if check_existing_credentials(search_site):
-                search_site = find_credential(search_site)
-                print(f"{search_site.first_name} {search_site.last_name}")
-                print("-"*20)
+            print("Enter Your Password")
+            inputpass = input()
 
-                print(f"Password.....{search_site.user_password}")
+            print("The login details you entered do not seem to exist. Please create an account before you can login")
+    
 
-            else:
-                print("These credentials do not exist")
+        
 
-        elif short_code == "ex":
-            print("Bye.....")
-            break
-        else:
-            print("I really didn't get that")
+    
 
 
 
