@@ -131,6 +131,9 @@ def main():
                             print("Enter your preferred password")
                             my_pass = input()
 
+                        else:
+                            cprint("Unrecognised input", "yellow")
+
                         save_credential(create_credential(sname, fname, lname, my_pass)) #Create and save credentials
                         print('\n')
                         print(f"New Credential {fname} {lname} created")
