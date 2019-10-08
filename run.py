@@ -4,6 +4,7 @@ import sys
 import random
 import string
 from credentials import User
+from termcolor import colored, cprint
 
 # from termcolor import colored, cprint
 
@@ -65,12 +66,14 @@ def save_users(user):
 
 
 def main():
-    print("Hello, Welcome to Password Locker. What is your name?")
-    user_name = input()
+    cprint("Hello, Welcome to Password Locker. What is your name?", "magenta")
+    user_name = input("Name:")
 
     while True:
-        print(f"Hello {user_name}, Please use these short codes to either login to your account or sign in. lg - log into your account, ca - create an account")
-        s_code = input().lower()
+        print(f"Hello {user_name}, Please use these short codes to either login to your account or sign in.") 
+        cprint("lg - log into your account", "magenta")
+        cprint("ca - create an account", "magenta")
+        s_code = input("Short Code:").lower()
 
         if s_code == 'ca':
             print("Enter username")
@@ -81,8 +84,9 @@ def main():
 
             save_users(create_user(fusername, fpin))
 
-            print("You have successfully created an account")
-            print("Please proceed to log in")
+            cprint("You have successfully created an account", "green")
+            cprint("Please proceed to log in", "magenta")
+            cprint('\n')
 
         
         
@@ -94,10 +98,11 @@ def main():
             pin = input()
 
             if username == fusername and pin == fpin:
-                print("lOGIN SUCCESSFUL")
+                cprint("lOGIN SUCCESSFUL", "green")
+                print('\n')
                 pass
                 while True:
-                    print("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, delete - delete credentials, ex-exit the account")
+                    cprint("Use these short codes: sc - Save existing credentials, cc - Create new credentials, dc - display credentials, fc - Find a credential, delete - delete credentials, ex-exit the account", "magenta")
 
                     short_code = input().lower()
 
@@ -106,10 +111,10 @@ def main():
                         print("-"*10)
 
                         print("Site Name...")
-                        sname = input()
+                        sname = input("Site Name")
 
                         print("First Name")
-                        fname = input()
+                        fname = input("")
 
                         print("Last Name....")
                         lname = input()
@@ -145,7 +150,7 @@ def main():
 
                         
                     
-                        save_credential(create_credential(sname, fname, lname, my_pass)) #Create and save credentials
+                        save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
                         print('\n')
                         print(f"{sname} credentials saved")
                         print('\n')
@@ -153,52 +158,58 @@ def main():
 
                     elif short_code == 'dc':
                         if display_credentials():
-                            print("Here is a list of all you credentials")
+                            cprint("Here is a list of all you credentials", "yellow")
                             print('\n')
 
                             for credential in display_credentials():
-                                print(f"{credential.account_name} .... {credential.first_name} {credential.last_name} .... {credential.user_password}")
+                                cprint(f"{credential.account_name}", "yellow")
+                                print("-"*30)
+                                print(f"Username: {credential.first_name} {credential.last_name}")
+                                print(f"Password: {credential.user_password}")
+                                print("-"*30)
                                 print('\n')
 
                         else:
                             print('\n')
-                            print("You don't seem to have any credentials saved yet")
+                            cprint("You don't seem to have any credentials saved yet", "red")
                             print('\n')
 
                     elif short_code == 'fc':
-                        print("Please enter the site name you want to search for")
+                        cprint("Please enter the site name you want to search for", "magenta")
 
-                        search_site = input()
+                        search_site = input("Site Name")
                         if check_existing_credentials(search_site):
                             search_site = find_credential(search_site)
-                            print(f"{search_site.first_name} {search_site.last_name}")
+                            cprint(f"{search_site.first_name} {search_site.last_name}", "yellow")
                             print("-"*20)
 
-                            print(f"Password.....{search_site.user_password}")
+                            cprint(f"Password.....{search_site.user_password}", "yellow")
 
                         else:
-                            print("These credentials do not exist")
+                            cprint("These credentials do not exist", "red")
+                            print('\n')
 
                     elif short_code == 'delete':
-                        print("Please enter the name name of the site you want to delete")
+                        cprint("Please enter the name name of the site you want to delete","magenta")
                         site_delete = input()
                         if check_existing_credentials(site_delete):
                             site_delete = find_credential(site_delete)
                             delete_credential(site_delete)
 
-                            print("Credentials deleted successfully")
+                            cprint("Credentials deleted successfully", "green")
 
                         else:
-                            print("Credentials do not exist")
+                            cprint("Credentials do not exist", "red")
 
 
                     elif short_code == "ex":
-                        print("Bye.....")
+                        cprint("Bye.....", "yellow")
                         break
                     else:
-                        print("I really didn't get that")
+                        cprint("I really didn't get that", "red")
             else:
-                print("Invalid login details")
+                cprint("Invalid login details", "red")
+                print('\n')
 
         elif s_code == 'lg':
             print("Please Enter your name")
@@ -207,7 +218,8 @@ def main():
             print("Enter Your Password")
             inputpass = input()
 
-            print("The login details you entered do not seem to exist. Please create an account before you can login")
+            cprint("The login details you entered do not seem to exist. Please create an account before you can login", "red")
+            print('\n')
     
 
         
