@@ -111,7 +111,7 @@ def main():
                         print("-"*10)
 
                         print("Site Name...")
-                        sname = input("Site Name")
+                        sname = input("Site Name: ")
 
                         print("First Name")
                         fname = input("")
@@ -126,6 +126,10 @@ def main():
                             password_length = int(input())
                             chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
                             my_pass = "".join(random.choice(chars) for i in range(password_length))
+                       
+                        elif password == 'NO':
+                            print("Enter your preferred password")
+                            my_pass = input()
 
                         save_credential(create_credential(sname, fname, lname, my_pass)) #Create and save credentials
                         print('\n')
@@ -166,7 +170,6 @@ def main():
                                 print("-"*30)
                                 print(f"Username: {credential.first_name} {credential.last_name}")
                                 print(f"Password: {credential.user_password}")
-                                print("-"*30)
                                 print('\n')
 
                         else:
