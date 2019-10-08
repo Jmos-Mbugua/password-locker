@@ -17,6 +17,8 @@ class Password :
         '''
         Password.credentials_list.remove(self)
 
+    
+
     @classmethod
     def find_by_account_name(cls, account_name):
         '''
@@ -44,6 +46,7 @@ class Password :
         Method that displays the credentials list
         '''
         return cls.credentials_list
+
 
 
     def __init__(self, account_name, first_name, last_name, user_password):

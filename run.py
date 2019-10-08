@@ -4,6 +4,7 @@ import sys
 import random
 import string
 from credentials import User
+
 # from termcolor import colored, cprint
 
 def create_credential(sname, fname, lname, password):
@@ -113,10 +114,15 @@ def main():
                         print("Last Name....")
                         lname = input()
 
-                        print("Password")
-                        password = input()
+                        print("Would you like a generated password, type yes/no")
+                        password = input().upper()
+                        if password == 'YES':
+                            print("How long would you like your password to be?")
+                            password_length = int(input())
+                            chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
+                            my_pass = "".join(random.choice(chars) for i in range(password_length))
 
-                        save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
+                        save_credential(create_credential(sname, fname, lname, my_pass)) #Create and save credentials
                         print('\n')
                         print(f"New Credential {fname} {lname} created")
                         print('\n')
@@ -134,19 +140,12 @@ def main():
                         print("Last Name")
                         lname = input()
 
+                        print("Password")
+                        password = input()
+
                         
-                        print("Would you like a generated password, type yes/no")
-                        password = input().upper()
-                        if password == 'YES':
-                            print("How long would you like your password to be?")
-                            password_length = int(input())
-
-
-
-
-
-
-                        save_credential(create_credential(sname, fname, lname, password)) #Create and save credentials
+                    
+                        save_credential(create_credential(sname, fname, lname, my_pass)) #Create and save credentials
                         print('\n')
                         print(f"{sname} credentials saved")
                         print('\n')
