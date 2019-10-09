@@ -82,7 +82,7 @@ def main():
             print("Enter password")
             fpin = input()
 
-            save_users(create_user(fusername, fpin))
+            
 
             cprint("You have successfully created an account", "green")
             cprint("Please proceed to log in", "magenta")
@@ -136,7 +136,9 @@ def main():
 
                         save_credential(create_credential(sname, fname, lname, my_pass)) #Create and save credentials
                         print('\n')
-                        print(f"New Credential {fname} {lname} created")
+                        print('-'*30)
+                        cprint(f"New Credential {fname} {lname} created", )
+                        print('-'*30)
                         print('\n')
 
                     elif short_code == 'sc':
@@ -183,7 +185,7 @@ def main():
                     elif short_code == 'fc':
                         cprint("Please enter the site name you want to search for", "magenta")
 
-                        search_site = input("Site Name")
+                        search_site = input("Site Name: ")
                         if check_existing_credentials(search_site):
                             search_site = find_credential(search_site)
                             cprint(f"{search_site.first_name} {search_site.last_name}", "yellow")
@@ -210,6 +212,8 @@ def main():
 
                     elif short_code == "ex":
                         cprint("Bye.....", "yellow")
+                        print('\n')
+                        print('-'*20)
                         break
                     else:
                         cprint("I really didn't get that", "red")

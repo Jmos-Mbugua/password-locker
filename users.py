@@ -16,13 +16,6 @@ class User:
         '''
         User.users_list.append(self)
 
-    # @classmethod
-    # def user_authenticate(cls, name, passwrd):
-    #     '''
-    #     This method checks whether the input details from the user match those in the user_list and returns boolean
-    #     '''
-    #     for user in cls.users_list:
-    #         if user.user_name == name and user.user_passwrd == passwrd:
-    #             return True
-    #     return False
+   
+   
 
