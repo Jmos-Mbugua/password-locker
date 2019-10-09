@@ -3,7 +3,7 @@ from credentials import Password
 import sys
 import random
 import string
-from credentials import User
+from users import User
 from termcolor import colored, cprint
 
 # from termcolor import colored, cprint
